@@ -1,0 +1,115 @@
+package com.tienda.todo1.models;
+
+import java.math.BigDecimal;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+
+/**
+ * The persistent class for the detalle_venta database table.
+ * Hulk Store 2018 - Todos los derechos reservados
+ * @author Manuel Cepeda - email manujca@hotmail.com - cel. 0989345370
+ * @version $1.0$
+ */
+@Entity
+@Table(name = "detalle_venta")
+public class DetalleVenta {
+
+	@Id
+	@GeneratedValue
+	private Integer id;
+	
+	@ManyToOne
+	@JoinColumn(name="producto")
+	private Producto producto;
+	
+	private Integer cantidad;
+	
+	private BigDecimal subtotal;
+	
+	private BigDecimal total;
+
+	/**
+	 * @return the id
+	 */
+	public Integer getId() {
+		return id;
+	}
+
+	/**
+	 * @param id the id to set
+	 */
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	/**
+	 * @return the producto
+	 */
+	public Producto getProducto() {
+		return producto;
+	}
+
+	/**
+	 * @param producto the producto to set
+	 */
+	public void setProducto(Producto producto) {
+		this.producto = producto;
+	}
+
+	/**
+	 * @return the cantidad
+	 */
+	public Integer getCantidad() {
+		return cantidad;
+	}
+
+	/**
+	 * @param cantidad the cantidad to set
+	 */
+	public void setCantidad(Integer cantidad) {
+		this.cantidad = cantidad;
+	}
+
+	/**
+	 * @return the subtotal
+	 */
+	public BigDecimal getSubtotal() {
+		return subtotal;
+	}
+
+	/**
+	 * @param subtotal the subtotal to set
+	 */
+	public void setSubtotal(BigDecimal subtotal) {
+		this.subtotal = subtotal;
+	}
+
+	/**
+	 * @return the total
+	 */
+	public BigDecimal getTotal() {
+		return total;
+	}
+
+	/**
+	 * @param total the total to set
+	 */
+	public void setTotal(BigDecimal total) {
+		this.total = total;
+	}
+
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return "DetalleVenta [id=" + id + ", producto=" + producto + ", cantidad=" + cantidad + ", subtotal=" + subtotal
+				+ ", total=" + total + "]";
+	}
+
+}
