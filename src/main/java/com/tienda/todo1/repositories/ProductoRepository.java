@@ -14,4 +14,7 @@ import com.tienda.todo1.models.Producto;
 @Repository
 public interface ProductoRepository extends CrudRepository<Producto, Integer>{
 
+	Producto findById(Integer id);
+	
+	Producto findByNombre(String nombre);
 }

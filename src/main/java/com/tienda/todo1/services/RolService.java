@@ -1,5 +1,7 @@
 package com.tienda.todo1.services;
 
+import javax.transaction.Transactional;
+
 import org.springframework.stereotype.Service;
 
 /**
@@ -9,6 +11,7 @@ import org.springframework.stereotype.Service;
  * @version $1.0$
  */
 @Service
+@Transactional
 public class RolService {
 
 }

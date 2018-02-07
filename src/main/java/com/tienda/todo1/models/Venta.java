@@ -2,17 +2,21 @@ package com.tienda.todo1.models;
 
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 /**
- * The persistent class for the venta database table.
- * Hulk Store 2018 - Todos los derechos reservados
+ * The persistent class for the venta database table. Hulk Store 2018 - Todos
+ * los derechos reservados
+ * 
  * @author Manuel Cepeda - email manujca@hotmail.com - cel. 0989345370
  * @version $1.0$
  */
@@ -22,22 +26,25 @@ public class Venta {
 	@Id
 	@GeneratedValue
 	private Integer id;
-	
-	@Column(name="nro_documento")
+
+	@Column(name = "nro_documento")
 	private String nroDocumento;
-	
-	@Column(name="fecha_venta")
+
+	@Column(name = "fecha_venta")
 	private Date fechaVenta;
-	
+
 	private BigDecimal subtotal;
-	
+
 	private BigDecimal iva;
-	
+
 	private BigDecimal total;
-	
+
 	@ManyToOne
-	@JoinColumn(name="usuario")
+	@JoinColumn(name = "usuario")
 	private Usuario usuario;
+
+	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+	private List<DetalleVenta> detalleList;
 
 	/**
 	 * @return the id
@@ -47,7 +54,8 @@ public class Venta {
 	}
 
 	/**
-	 * @param id the id to set
+	 * @param id
+	 *            the id to set
 	 */
 	public void setId(Integer id) {
 		this.id = id;
@@ -61,7 +69,8 @@ public class Venta {
 	}
 
 	/**
-	 * @param nroDocumento the nroDocumento to set
+	 * @param nroDocumento
+	 *            the nroDocumento to set
 	 */
 	public void setNroDocumento(String nroDocumento) {
 		this.nroDocumento = nroDocumento;
@@ -75,7 +84,8 @@ public class Venta {
 	}
 
 	/**
-	 * @param fechaVenta the fechaVenta to set
+	 * @param fechaVenta
+	 *            the fechaVenta to set
 	 */
 	public void setFechaVenta(Date fechaVenta) {
 		this.fechaVenta = fechaVenta;
@@ -89,7 +99,8 @@ public class Venta {
 	}
 
 	/**
-	 * @param subtotal the subtotal to set
+	 * @param subtotal
+	 *            the subtotal to set
 	 */
 	public void setSubtotal(BigDecimal subtotal) {
 		this.subtotal = subtotal;
@@ -103,7 +114,8 @@ public class Venta {
 	}
 
 	/**
-	 * @param iva the iva to set
+	 * @param iva
+	 *            the iva to set
 	 */
 	public void setIva(BigDecimal iva) {
 		this.iva = iva;
@@ -117,7 +129,8 @@ public class Venta {
 	}
 
 	/**
-	 * @param total the total to set
+	 * @param total
+	 *            the total to set
 	 */
 	public void setTotal(BigDecimal total) {
 		this.total = total;
@@ -131,13 +144,30 @@ public class Venta {
 	}
 
 	/**
-	 * @param usuario the usuario to set
+	 * @param usuario
+	 *            the usuario to set
 	 */
 	public void setUsuario(Usuario usuario) {
 		this.usuario = usuario;
 	}
+	
+	/**
+	 * @return the detalleList
+	 */
+	public List<DetalleVenta> getDetalleList() {
+		return detalleList;
+	}
 
-	/* (non-Javadoc)
+	/**
+	 * @param detalleList the detalleList to set
+	 */
+	public void setDetalleList(List<DetalleVenta> detalleList) {
+		this.detalleList = detalleList;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Object#toString()
 	 */
 	@Override
@@ -145,5 +175,5 @@ public class Venta {
 		return "Venta [id=" + id + ", nroDocumento=" + nroDocumento + ", fechaVenta=" + fechaVenta + ", subtotal="
 				+ subtotal + ", iva=" + iva + ", total=" + total + ", usuario=" + usuario + "]";
 	}
-	
+
 }

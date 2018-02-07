@@ -3,8 +3,6 @@ package com.tienda.todo1.services;
 import java.util.Date;
 import java.util.List;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -25,7 +23,7 @@ import com.tienda.todo1.repositories.UsuarioRepository;
 @Transactional
 public class UsuarioService {
 
-	private static Logger log = LoggerFactory.getLogger(UsuarioService.class);
+//	private static Logger log = LoggerFactory.getLogger(UsuarioService.class);
 	
 	private UsuarioRepository usuarioRepository;
 	private RolRepository rolRepository;

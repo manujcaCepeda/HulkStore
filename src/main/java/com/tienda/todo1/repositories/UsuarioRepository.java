@@ -14,6 +14,8 @@ import com.tienda.todo1.models.Usuario;
 @Repository
 public interface UsuarioRepository extends CrudRepository<Usuario, Integer>{
 
+	Usuario findById(Integer id);
+	
 	Usuario findByCorreo(String correo);
 	
 	Usuario findByCorreoAndPassword(String correo, String password);

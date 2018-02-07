@@ -12,6 +12,7 @@ import com.tienda.todo1.models.Categoria;
  * @version $1.0$
  */
 @Repository
-public interface CategoriaRepository extends CrudRepository<Categoria, Integer>{
+public interface CategoriaRepository extends CrudRepository<Categoria, String>{
 
+	Categoria findByCodigo(String codigo);
 }

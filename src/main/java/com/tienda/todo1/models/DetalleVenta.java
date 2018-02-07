@@ -32,6 +32,10 @@ public class DetalleVenta {
 	private BigDecimal subtotal;
 	
 	private BigDecimal total;
+	
+	@ManyToOne
+	@JoinColumn(name="venta")
+	private Venta venta;
 
 	/**
 	 * @return the id
@@ -103,13 +107,28 @@ public class DetalleVenta {
 		this.total = total;
 	}
 
+	
+	/**
+	 * @return the venta
+	 */
+	public Venta getVenta() {
+		return venta;
+	}
+
+	/**
+	 * @param venta the venta to set
+	 */
+	public void setVenta(Venta venta) {
+		this.venta = venta;
+	}
+
 	/* (non-Javadoc)
 	 * @see java.lang.Object#toString()
 	 */
 	@Override
 	public String toString() {
 		return "DetalleVenta [id=" + id + ", producto=" + producto + ", cantidad=" + cantidad + ", subtotal=" + subtotal
-				+ ", total=" + total + "]";
+				+ ", total=" + total + ", venta=" + venta + "]";
 	}
 
 }

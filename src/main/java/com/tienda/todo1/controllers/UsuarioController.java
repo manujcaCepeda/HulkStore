@@ -39,6 +39,12 @@ public class UsuarioController extends BaseController{
 		this.usuarioService = usuarioService;
 	}
 
+	/**
+	 * API REST para crear un usuario
+	 * @param model
+	 * @param reqUser
+	 * @return
+	 */
 	@PostMapping(produces = "application/json")
 	public UsuarioResponse saveUsuario(ModelMap model, @RequestBody Usuario reqUser) {
 		UsuarioResponse usuario = null;
@@ -54,6 +60,10 @@ public class UsuarioController extends BaseController{
 		return usuario;
 	}
 
+	/**
+	 * API REST para obtener todos los usuarios
+	 * @return
+	 */
 	@GetMapping(produces = "application/json")
 	public List<Usuario> getUsuarios() {
 		try {
@@ -65,6 +75,12 @@ public class UsuarioController extends BaseController{
 
 	}
 	
+	/**
+	 * API REST para obtener un Usuario por correo y password
+	 * @param correo
+	 * @param password
+	 * @return
+	 */
 	@GetMapping(value="/{correo}/{password}", produces = "application/json")
 	public BodyResponse<UsuarioResponse> getUsuarioPorCedulaPassword(@PathVariable("correo") String correo, @PathVariable("password") String password ) {
 		try {
