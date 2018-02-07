@@ -1,5 +1,6 @@
 package com.tienda.todo1.services;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -8,6 +9,7 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.tienda.todo1.dto.response.BodyListResponse;
 import com.tienda.todo1.dto.response.ProductoResponse;
 import com.tienda.todo1.models.Producto;
 import com.tienda.todo1.repositories.CategoriaRepository;
@@ -39,7 +41,7 @@ public class ProductoService {
 	 * @param producto
 	 * @return
 	 */
-	private ProductoResponse doUsusarioResponse(Producto producto) {
+	private ProductoResponse doProductoResponse(Producto producto) {
 		ProductoResponse productoResponse = new ProductoResponse(producto.getNombre(), producto.getDescripcion(),
 				producto.getFecha(), producto.getCantidad(), producto.getUrl(), producto.getPrecio());
 		productoResponse.setCategoria(categoriaRepository.findByCodigo(producto.getCategoria().getCodigo()).getDescripcion());
@@ -50,8 +52,16 @@ public class ProductoService {
 	 * Método que obtiene todos los producto de la bdd
 	 * @return
 	 */
-	public List<Producto> obtenerProductos() {
-		return (List<Producto>) productoRepository.findAll();
+	public BodyListResponse<ProductoResponse> obtenerProductos() {
+		List<ProductoResponse> productos = new ArrayList<>();
+		List<Producto> respuesta = (List<Producto>) productoRepository.findAll();
+
+		if (respuesta != null && !respuesta.isEmpty()) {
+			for (Producto prod : respuesta) {
+				productos.add(doProductoResponse(prod));
+			}
+		}
+		return new BodyListResponse<>(productos);
 	}
 
 	/**
@@ -64,7 +74,7 @@ public class ProductoService {
 		Producto productoExiste = productoRepository.findByNombre(producto.getNombre());
 		if (productoExiste == null) {
 			producto = productoRepository.save(producto);
-			return doUsusarioResponse(producto);
+			return doProductoResponse(producto);
 		}
 		return null;
 	}

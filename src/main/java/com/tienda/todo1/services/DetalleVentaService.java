@@ -38,7 +38,7 @@ public class DetalleVentaService {
 	 * @param detalleVenta
 	 * @return
 	 */
-	private DetalleVentaResponse doUsusarioResponse(DetalleVenta detalleVenta) {
+	private DetalleVentaResponse doDetalleventaResponse(DetalleVenta detalleVenta) {
 		DetalleVentaResponse detalleVentaResponse = new DetalleVentaResponse(detalleVenta.getCantidad(), detalleVenta.getSubtotal(),
 				detalleVenta.getTotal());
 		detalleVentaResponse.setProducto(productoRepository.findById(detalleVenta.getProducto().getId()).getNombre());
@@ -60,7 +60,7 @@ public class DetalleVentaService {
 	 */
 	public DetalleVentaResponse crearDetalleVenta(DetalleVenta detalleVenta) {
 		detalleVenta = detalleVentaRepository.save(detalleVenta);
-		return doUsusarioResponse(detalleVenta);
+		return doDetalleventaResponse(detalleVenta);
 	}
 
 }

@@ -45,7 +45,7 @@ public class IngresoService {
 	 * @param ingreso
 	 * @return
 	 */
-	private IngresoResponse doUsusarioResponse(Ingreso ingreso) {
+	private IngresoResponse doIngresoResponse(Ingreso ingreso) {
 		IngresoResponse ingresoResponse = new IngresoResponse(ingreso.getCantidad(), ingreso.getFechaIngreso(),
 				ingreso.getTotal());
 		ingresoResponse.setProducto(productoRepository.findById(ingreso.getProducto().getId()).getNombre());
@@ -72,7 +72,7 @@ public class IngresoService {
 		Producto producto = productoRepository.findById(ingreso.getProducto().getId());
 		producto.setCantidad(producto.getCantidad() + ingreso.getCantidad());
 		productoRepository.save(producto);
-		return doUsusarioResponse(ingresoRepository.save(ingreso));
+		return doIngresoResponse(ingresoRepository.save(ingreso));
 	}
 
 }

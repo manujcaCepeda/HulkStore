@@ -1,6 +1,5 @@
 package com.tienda.todo1.controllers;
 
-import java.util.List;
 import java.util.NoSuchElementException;
 
 import org.slf4j.Logger;
@@ -14,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.tienda.todo1.dto.response.BodyListResponse;
 import com.tienda.todo1.dto.response.ProductoResponse;
 import com.tienda.todo1.models.Producto;
 import com.tienda.todo1.services.ProductoService;
@@ -63,7 +63,7 @@ public class ProductoController extends BaseController{
 	 * @return
 	 */
 	@GetMapping(produces = "application/json")
-	public List<Producto> getProductos() {
+	public BodyListResponse<ProductoResponse> getProductos() {
 		try {
 			return productoService.obtenerProductos();
 		} catch (DataIntegrityViolationException ex) {

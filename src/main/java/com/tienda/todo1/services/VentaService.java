@@ -46,7 +46,7 @@ public class VentaService {
 	 * @param venta
 	 * @return
 	 */
-	private VentaResponse doUsusarioResponse(Venta venta) {
+	private VentaResponse doVentaResponse(Venta venta) {
 		VentaResponse ventaResponse = new VentaResponse(venta.getNroDocumento(), venta.getFechaVenta(),
 				venta.getSubtotal(), venta.getIva(), venta.getTotal());
 		Usuario user = usuarioRepository.findById(venta.getUsuario().getId());
@@ -76,7 +76,7 @@ public class VentaService {
 			
 			detalle.setVenta(venta);
 		});
-		return doUsusarioResponse(ventaRepository.save(venta));
+		return doVentaResponse(ventaRepository.save(venta));
 	}
 
 }
