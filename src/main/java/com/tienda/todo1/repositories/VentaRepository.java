@@ -1,5 +1,7 @@
 package com.tienda.todo1.repositories;
 
+import java.util.List;
+
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
@@ -14,4 +16,5 @@ import com.tienda.todo1.models.Venta;
 @Repository
 public interface VentaRepository extends CrudRepository<Venta, Integer>{
 
+	List<Venta> findByUsuarioId(Integer id);
 }

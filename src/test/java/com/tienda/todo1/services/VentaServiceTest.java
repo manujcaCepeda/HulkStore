@@ -21,6 +21,7 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import com.tienda.todo1.dto.response.BodyListResponse;
 import com.tienda.todo1.dto.response.VentaResponse;
 import com.tienda.todo1.models.DetalleVenta;
 import com.tienda.todo1.models.Producto;
@@ -118,9 +119,21 @@ public class VentaServiceTest {
 	public void whenValidList_thenVentaShouldBeFound() {
 		List<Venta> lista = new ArrayList<>();
 		lista.add(createVenta());
+		when(usuarioRepository.findById(findUsuario().getId())).thenReturn(findUsuario());
 		when(ventaRepository.findAll()).thenReturn(lista);
-		List<Venta> getVentas = ventaService.obtenerVentas();
+		BodyListResponse<VentaResponse> getVentas = ventaService.obtenerVentas();
 		// Assert
-		assertThat(getVentas.size(), is(equalTo(1)));
+		assertThat(getVentas.getData().size(), is(equalTo(1)));
+	}
+	
+	@Test
+	public void whenValidList_thenVentaByUserShouldBeFound() {
+		List<Venta> lista = new ArrayList<>();
+		lista.add(createVenta());
+		when(usuarioRepository.findById(findUsuario().getId())).thenReturn(findUsuario());
+		when(ventaRepository.findByUsuarioId(1)).thenReturn(lista);
+		BodyListResponse<VentaResponse> getVentas = ventaService.obtenerVentasPorIdUsuario(1);
+		// Assert
+		assertThat(getVentas.getData().size(), is(equalTo(1)));
 	}
 }

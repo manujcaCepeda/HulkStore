@@ -1,18 +1,18 @@
 package com.tienda.todo1.controllers;
 
-import java.util.List;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.tienda.todo1.dto.response.BodyListResponse;
 import com.tienda.todo1.dto.response.VentaResponse;
 import com.tienda.todo1.models.Venta;
 import com.tienda.todo1.services.VentaService;
@@ -59,9 +59,25 @@ public class VentaController extends BaseController{
 	 * @return
 	 */
 	@GetMapping(produces = "application/json")
-	public List<Venta> getVentas() {
+	public BodyListResponse<VentaResponse> getVentas() {
 		try {
 			return ventaService.obtenerVentas();
+		} catch (DataIntegrityViolationException ex) {
+			logger.debug(ex.getMessage(), ex);
+			throw new DataIntegrityViolationException("Verifique los datos ingresados: ");
+		}
+
+	}
+	
+	
+	/**
+	 * API REST para obtener todas las ventas
+	 * @return
+	 */
+	@GetMapping(value="/{idUsuario}", produces = "application/json")
+	public BodyListResponse<VentaResponse> getVentas(@PathVariable("idUsuario") Integer idUsuario) {
+		try {
+			return ventaService.obtenerVentasPorIdUsuario(idUsuario);
 		} catch (DataIntegrityViolationException ex) {
 			logger.debug(ex.getMessage(), ex);
 			throw new DataIntegrityViolationException("Verifique los datos ingresados: ");

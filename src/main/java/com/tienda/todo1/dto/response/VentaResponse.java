@@ -3,6 +3,8 @@ package com.tienda.todo1.dto.response;
 import java.math.BigDecimal;
 import java.util.Date;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 /**
  * DTO for response the Venta - API REST.
  * Hulk Store 2018 - Todos los derechos reservados
@@ -12,6 +14,7 @@ import java.util.Date;
 public class VentaResponse {
 
 	private String nroDocumento;
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy")
 	private Date fecha;
 	private BigDecimal subtotal;
 	private BigDecimal iva;

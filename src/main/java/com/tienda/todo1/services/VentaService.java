@@ -1,5 +1,6 @@
 package com.tienda.todo1.services;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -8,6 +9,7 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.tienda.todo1.dto.response.BodyListResponse;
 import com.tienda.todo1.dto.response.VentaResponse;
 import com.tienda.todo1.models.Producto;
 import com.tienda.todo1.models.Usuario;
@@ -61,8 +63,32 @@ public class VentaService {
 	 * Método que obtiene todos los Venta de la bdd
 	 * @return
 	 */
-	public List<Venta> obtenerVentas() {
-		return (List<Venta>) ventaRepository.findAll();
+	public BodyListResponse<VentaResponse> obtenerVentas() {
+		List<VentaResponse> ventas = new ArrayList<>();	
+		List<Venta> respuesta = (List<Venta>) ventaRepository.findAll();
+
+		if (respuesta != null && !respuesta.isEmpty()) {
+			for (Venta venta : respuesta) {
+				ventas.add(doVentaResponse(venta));
+			}
+		}
+		return new BodyListResponse<>(ventas);
+	}
+	
+	/**
+	 * Método que obtiene todos los Venta de un empleado especifico
+	 * @return
+	 */
+	public BodyListResponse<VentaResponse> obtenerVentasPorIdUsuario(Integer idUsuario) {
+		List<VentaResponse> ventas = new ArrayList<>();	
+		List<Venta> respuesta = (List<Venta>) ventaRepository.findByUsuarioId(idUsuario);
+
+		if (respuesta != null && !respuesta.isEmpty()) {
+			for (Venta venta : respuesta) {
+				ventas.add(doVentaResponse(venta));
+			}
+		}
+		return new BodyListResponse<>(ventas);
 	}
 
 	/**
@@ -72,7 +98,7 @@ public class VentaService {
 	 */
 	public VentaResponse crearVenta(Venta venta) {
 		venta.setFechaVenta(new Date());
-		venta.setNroDocumento("000"+ productoRepository.count() + 1);
+		venta.setNroDocumento("0000000"+ productoRepository.count() + 1);
 		venta.getDetalleList().forEach(detalle ->{
 			Producto producto = productoRepository.findById(detalle.getProducto().getId());
 			producto.setCantidad(producto.getCantidad() - detalle.getCantidad());
