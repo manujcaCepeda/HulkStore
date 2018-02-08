@@ -42,7 +42,7 @@ public class ProductoService {
 	 * @return
 	 */
 	private ProductoResponse doProductoResponse(Producto producto) {
-		ProductoResponse productoResponse = new ProductoResponse(producto.getNombre(), producto.getDescripcion(),
+		ProductoResponse productoResponse = new ProductoResponse(producto.getId(), producto.getNombre(), producto.getDescripcion(),
 				producto.getFecha(), producto.getCantidad(), producto.getUrl(), producto.getPrecio());
 		productoResponse.setCategoria(categoriaRepository.findByCodigo(producto.getCategoria().getCodigo()).getDescripcion());
 		return productoResponse;
@@ -79,4 +79,11 @@ public class ProductoService {
 		return null;
 	}
 
+	/**
+	 * Método que permite eliminar un Producto de la bdd
+	 * @param codigo
+	 */
+	public void eliminar(Integer codigo) {
+		productoRepository.delete(codigo);
+	}
 }

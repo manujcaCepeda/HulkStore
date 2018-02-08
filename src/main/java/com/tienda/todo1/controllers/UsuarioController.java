@@ -46,8 +46,8 @@ public class UsuarioController extends BaseController{
 	 * @return
 	 */
 	@PostMapping(produces = "application/json")
-	public UsuarioResponse saveUsuario(ModelMap model, @RequestBody Usuario reqUser) {
-		UsuarioResponse usuario = null;
+	public BodyResponse<UsuarioResponse> saveUsuario(ModelMap model, @RequestBody Usuario reqUser) {
+		BodyResponse<UsuarioResponse> usuario = null;
 		try {
 			usuario = usuarioService.crearUsuario(reqUser);
 		} catch (DataIntegrityViolationException ex) {

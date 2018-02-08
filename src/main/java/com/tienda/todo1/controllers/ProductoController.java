@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -71,6 +72,20 @@ public class ProductoController extends BaseController{
 			throw new DataIntegrityViolationException("Verifique los datos ingresados: ");
 		}
 
+	}
+	
+	/**
+	 * API REST para eliminar un producto
+	 * @return
+	 */
+	@RequestMapping(path="/{id}", produces="application/json")
+	public void eliminarPaquete(@PathVariable(value="id") Integer codigo){
+		try {
+			productoService.eliminar(codigo);
+		} catch (DataIntegrityViolationException e) {
+			logger.info("Error en el consumo del servicio eliminarPaquete : " +e.getMessage());
+			throw new DataIntegrityViolationException(e.getMessage());
+		}
 	}
 	
 	/*@GetMapping(value="/{correo}/{password}", produces = "application/json")

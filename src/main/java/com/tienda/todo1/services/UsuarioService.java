@@ -59,12 +59,12 @@ public class UsuarioService {
 	 * @param usuario
 	 * @return
 	 */
-	public UsuarioResponse crearUsuario(Usuario usuario) {
+	public BodyResponse<UsuarioResponse> crearUsuario(Usuario usuario) {
 		usuario.setFecha(new Date());
 		Usuario usuarioExiste = usuarioRepository.findByCorreo(usuario.getCorreo());
 		if (usuarioExiste == null) {
 			usuario = usuarioRepository.save(usuario);
-			return doUsusarioResponse(usuario);
+			return new BodyResponse<>(doUsusarioResponse(usuario));
 		}
 		return null;
 	}

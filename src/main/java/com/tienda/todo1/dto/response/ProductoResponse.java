@@ -11,6 +11,7 @@ import java.util.Date;
  */
 public class ProductoResponse {
 
+	private Integer id;
 	private String nombre;
 	private String descripcion;
 	private Date fecha;
@@ -19,9 +20,10 @@ public class ProductoResponse {
 	private String categoria;
 	private BigDecimal precio;
 	
-	public ProductoResponse(String nombre, String descripcion, Date fecha, Integer cantidad, String url,
+	public ProductoResponse(Integer id, String nombre, String descripcion, Date fecha, Integer cantidad, String url,
 			BigDecimal precio) {
 		super();
+		this.id = id;
 		this.nombre = nombre;
 		this.descripcion = descripcion;
 		this.fecha = fecha;
@@ -126,6 +128,20 @@ public class ProductoResponse {
 	 */
 	public void setPrecio(BigDecimal precio) {
 		this.precio = precio;
+	}
+
+	/**
+	 * @return the id
+	 */
+	public Integer getId() {
+		return id;
+	}
+
+	/**
+	 * @param id the id to set
+	 */
+	public void setId(Integer id) {
+		this.id = id;
 	}
 
 }

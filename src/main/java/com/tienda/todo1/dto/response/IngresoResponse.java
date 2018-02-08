@@ -3,6 +3,8 @@ package com.tienda.todo1.dto.response;
 import java.math.BigDecimal;
 import java.util.Date;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 
 /**
  * DTO for response the Ingreso - API REST.
@@ -12,14 +14,18 @@ import java.util.Date;
  */
 public class IngresoResponse {
 
+	private Integer id;
 	private Integer cantidad;
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy")
 	private Date fecha;
 	private String producto;
 	private BigDecimal total;
 	private String usuario;
+	private BigDecimal precio;
 	
-	public IngresoResponse(Integer cantidad, Date fecha, BigDecimal total) {
+	public IngresoResponse(Integer id, Integer cantidad, Date fecha, BigDecimal total) {
 		super();
+		this.id = id;
 		this.cantidad = cantidad;
 		this.fecha = fecha;
 		this.total = total;
@@ -93,6 +99,34 @@ public class IngresoResponse {
 	 */
 	public void setUsuario(String usuario) {
 		this.usuario = usuario;
+	}
+
+	/**
+	 * @return the precio
+	 */
+	public BigDecimal getPrecio() {
+		return precio;
+	}
+
+	/**
+	 * @param precio the precio to set
+	 */
+	public void setPrecio(BigDecimal precio) {
+		this.precio = precio;
+	}
+
+	/**
+	 * @return the id
+	 */
+	public Integer getId() {
+		return id;
+	}
+
+	/**
+	 * @param id the id to set
+	 */
+	public void setId(Integer id) {
+		this.id = id;
 	}
 
 }

@@ -1,5 +1,6 @@
 package com.tienda.todo1.services;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -8,6 +9,7 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.tienda.todo1.dto.response.BodyListResponse;
 import com.tienda.todo1.dto.response.IngresoResponse;
 import com.tienda.todo1.models.Ingreso;
 import com.tienda.todo1.models.Producto;
@@ -46,9 +48,12 @@ public class IngresoService {
 	 * @return
 	 */
 	private IngresoResponse doIngresoResponse(Ingreso ingreso) {
-		IngresoResponse ingresoResponse = new IngresoResponse(ingreso.getCantidad(), ingreso.getFechaIngreso(),
+		IngresoResponse ingresoResponse = new IngresoResponse(ingreso.getId(), ingreso.getCantidad(), ingreso.getFechaIngreso(),
 				ingreso.getTotal());
-		ingresoResponse.setProducto(productoRepository.findById(ingreso.getProducto().getId()).getNombre());
+		
+		Producto producto = productoRepository.findById(ingreso.getProducto().getId());
+		ingresoResponse.setProducto(producto.getNombre());
+		ingresoResponse.setPrecio(producto.getPrecio());
 		Usuario user = usuarioRepository.findById(ingreso.getUsuario().getId());
 		ingresoResponse.setUsuario(user.getNombres() + " " + user.getApellidos());
 		return ingresoResponse;
@@ -58,8 +63,16 @@ public class IngresoService {
 	 * Método que obtiene todos los ingreso de la bdd
 	 * @return
 	 */
-	public List<Ingreso> obtenerIngresos() {
-		return (List<Ingreso>) ingresoRepository.findAll();
+	public BodyListResponse<IngresoResponse> obtenerIngresos() {
+		List<IngresoResponse> productos = new ArrayList<>();	
+		List<Ingreso> respuesta = (List<Ingreso>) ingresoRepository.findAll();
+
+		if (respuesta != null && !respuesta.isEmpty()) {
+			for (Ingreso ingreso : respuesta) {
+				productos.add(doIngresoResponse(ingreso));
+			}
+		}
+		return new BodyListResponse<>(productos);
 	}
 
 	/**
@@ -73,6 +86,18 @@ public class IngresoService {
 		producto.setCantidad(producto.getCantidad() + ingreso.getCantidad());
 		productoRepository.save(producto);
 		return doIngresoResponse(ingresoRepository.save(ingreso));
+	}
+	
+	/**
+	 * Método que permite eliminar un Ingreso de la bdd
+	 * @param codigo
+	 */
+	public void eliminar(Integer codigo) {
+		Ingreso ingreso = ingresoRepository.findOne(codigo);
+		Producto producto = ingreso.getProducto();
+		producto.setCantidad(producto.getCantidad() - ingreso.getCantidad());
+		productoRepository.save(producto);
+		ingresoRepository.delete(codigo);
 	}
 
 }
