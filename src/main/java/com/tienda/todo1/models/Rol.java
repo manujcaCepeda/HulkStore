@@ -63,12 +63,4 @@ public class Rol {
 		this.descripcion = descripcion;
 	}
 
-	/* (non-Javadoc)
-	 * @see java.lang.Object#toString()
-	 */
-	@Override
-	public String toString() {
-		return "Rol [id=" + id + ", rol=" + rol + ", descripcion=" + descripcion + "]";
-	}
-
 }

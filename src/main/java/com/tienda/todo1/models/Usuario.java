@@ -165,14 +165,4 @@ public class Usuario {
 		this.fecha = fecha;
 	}
 
-	/* (non-Javadoc)
-	 * @see java.lang.Object#toString()
-	 */
-	@Override
-	public String toString() {
-		return "Usuario [id=" + id + ", password=" + password + ", nombres=" + nombres
-				+ ", apellidos=" + apellidos + ", correo=" + correo + ", telefono=" + telefono + ", direccion="
-				+ direccion + ", fecha=" + fecha + ", rol=" + rol + "]";
-	}
-	
 }

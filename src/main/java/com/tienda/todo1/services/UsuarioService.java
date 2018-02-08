@@ -28,6 +28,10 @@ public class UsuarioService {
 	private UsuarioRepository usuarioRepository;
 	private RolRepository rolRepository;
 
+	public UsuarioService() {
+		
+	}
+	
 	@Autowired
 	public UsuarioService(UsuarioRepository usuarioRepository, RolRepository rolRepository) {
 		this.usuarioRepository = usuarioRepository;
@@ -40,7 +44,7 @@ public class UsuarioService {
 	 * @return
 	 */
 	private UsuarioResponse doUsusarioResponse(Usuario usuario) {
-		UsuarioResponse usuarioResponse = new UsuarioResponse(usuario.getApellidos(), usuario.getNombres(),
+		UsuarioResponse usuarioResponse = new UsuarioResponse(usuario.getId(), usuario.getApellidos(), usuario.getNombres(),
 				usuario.getDireccion(), usuario.getTelefono(), usuario.getCorreo());
 		usuarioResponse.setRol(rolRepository.findById(usuario.getRol().getId()).getDescripcion());
 		return usuarioResponse;

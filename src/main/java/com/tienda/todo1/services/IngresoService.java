@@ -34,6 +34,10 @@ public class IngresoService {
 	private ProductoRepository productoRepository;
 	private UsuarioRepository usuarioRepository;
 
+	public IngresoService() {
+		
+	}
+	
 	@Autowired
 	public IngresoService(IngresoRepository ingresoRepository, ProductoRepository productoRepository,
 			UsuarioRepository usuarioRepository) {

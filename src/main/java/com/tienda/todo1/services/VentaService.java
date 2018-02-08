@@ -32,6 +32,9 @@ public class VentaService {
 	private ProductoRepository productoRepository;
 	private UsuarioRepository usuarioRepository;
 	
+	public VentaService() {
+		
+	}
 	
 	@Autowired
 	public VentaService(VentaRepository ventaRepository, ProductoRepository productoRepository,
@@ -69,6 +72,7 @@ public class VentaService {
 	 */
 	public VentaResponse crearVenta(Venta venta) {
 		venta.setFechaVenta(new Date());
+		venta.setNroDocumento("000"+ productoRepository.count() + 1);
 		venta.getDetalleList().forEach(detalle ->{
 			Producto producto = productoRepository.findById(detalle.getProducto().getId());
 			producto.setCantidad(producto.getCantidad() - detalle.getCantidad());

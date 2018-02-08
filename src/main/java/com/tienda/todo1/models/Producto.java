@@ -150,15 +150,5 @@ public class Producto {
 		this.categoria = categoria;
 	}
 
-	/* (non-Javadoc)
-	 * @see java.lang.Object#toString()
-	 */
-	@Override
-	public String toString() {
-		return "Producto [id=" + id + ", nombre=" + nombre + ", descripcion=" + descripcion + ", url=" + url
-				+ ", precio=" + precio + ", cantidad=" + cantidad + ", fecha=" + fecha + ", categoria=" + categoria
-				+ "]";
-	}
 
-	
 }

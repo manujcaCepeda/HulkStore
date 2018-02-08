@@ -122,13 +122,4 @@ public class Ingreso {
 		this.fechaIngreso = fechaIngreso;
 	}
 
-	/* (non-Javadoc)
-	 * @see java.lang.Object#toString()
-	 */
-	@Override
-	public String toString() {
-		return "Ingresos [id=" + id + ", producto=" + producto + ", cantidad=" + cantidad + ", total=" + total
-				+ ", usuario=" + usuario + ", fechaIngreso=" + fechaIngreso + "]";
-	}
-
 }

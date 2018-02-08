@@ -8,6 +8,7 @@ package com.tienda.todo1.dto.response;
  */
 public class UsuarioResponse {
 
+	private Integer id;
 	private String apellidos;
 	private String nombres;
 	private String direccion;
@@ -15,13 +16,14 @@ public class UsuarioResponse {
 	private String correo;
 	private String rol;
 	
-	public UsuarioResponse(String apellidos, String nombres, String direccion, String telefono, String correo) {
+	public UsuarioResponse(Integer id, String apellidos, String nombres, String direccion, String telefono, String correo) {
 		super();
 		this.apellidos = apellidos;
 		this.nombres = nombres;
 		this.direccion = direccion;
 		this.telefono = telefono;
 		this.correo = correo;
+		this.id = id;
 	}
 
 	/**
@@ -106,6 +108,20 @@ public class UsuarioResponse {
 	 */
 	public void setRol(String rol) {
 		this.rol = rol;
+	}
+
+	/**
+	 * @return the id
+	 */
+	public Integer getId() {
+		return id;
+	}
+
+	/**
+	 * @param id the id to set
+	 */
+	public void setId(Integer id) {
+		this.id = id;
 	}
 
 }

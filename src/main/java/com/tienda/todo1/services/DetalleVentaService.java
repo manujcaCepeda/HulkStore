@@ -27,6 +27,10 @@ public class DetalleVentaService {
 	private DetalleVentaRepository detalleVentaRepository;
 	private ProductoRepository productoRepository;
 
+	public DetalleVentaService() {
+		
+	}
+	
 	@Autowired
 	public DetalleVentaService(DetalleVentaRepository detalleVentaRepository, ProductoRepository productoRepository) {
 		this.detalleVentaRepository = detalleVentaRepository;

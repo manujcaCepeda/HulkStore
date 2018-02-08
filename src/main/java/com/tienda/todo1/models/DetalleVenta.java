@@ -122,13 +122,5 @@ public class DetalleVenta {
 		this.venta = venta;
 	}
 
-	/* (non-Javadoc)
-	 * @see java.lang.Object#toString()
-	 */
-	@Override
-	public String toString() {
-		return "DetalleVenta [id=" + id + ", producto=" + producto + ", cantidad=" + cantidad + ", subtotal=" + subtotal
-				+ ", total=" + total + ", venta=" + venta + "]";
-	}
 
 }

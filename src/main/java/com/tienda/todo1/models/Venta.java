@@ -165,15 +165,4 @@ public class Venta {
 		this.detalleList = detalleList;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see java.lang.Object#toString()
-	 */
-	@Override
-	public String toString() {
-		return "Venta [id=" + id + ", nroDocumento=" + nroDocumento + ", fechaVenta=" + fechaVenta + ", subtotal="
-				+ subtotal + ", iva=" + iva + ", total=" + total + ", usuario=" + usuario + "]";
-	}
-
 }
