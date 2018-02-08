@@ -1,17 +1,18 @@
 package com.tienda.todo1.controllers;
 
 import java.util.NoSuchElementException;
+import org.springframework.http.HttpStatus;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
-import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.tienda.todo1.dto.response.BodyListResponse;
@@ -45,7 +46,8 @@ public class ProductoController extends BaseController{
 	 * @return
 	 */
 	@PostMapping(produces = "application/json")
-	public ProductoResponse saveProducto(ModelMap model, @RequestBody Producto reqProducto) {
+	@ResponseStatus(HttpStatus.CREATED)
+	public ProductoResponse saveProducto(@RequestBody Producto reqProducto) {
 		ProductoResponse producto = null;
 		try {
 			producto = productoService.crearProducto(reqProducto);
@@ -87,18 +89,5 @@ public class ProductoController extends BaseController{
 			throw new DataIntegrityViolationException(e.getMessage());
 		}
 	}
-	
-	/*@GetMapping(value="/{correo}/{password}", produces = "application/json")
-	public BodyResponse<ProductoResponse> getProductoPorCedulaPassword(@PathVariable("correo") String correo, @PathVariable("password") String password ) {
-		try {
-			return productoService.obtenerPorCorreoPassword(correo, password);
-		} catch (DataIntegrityViolationException ex) {
-			logger.debug(ex.getMessage(), ex);
-			throw new DataIntegrityViolationException("Verifique los datos ingresados: ");
-		}catch (Exception ex) {
-			logger.debug(ex.getMessage(), ex);
-			throw new DataIntegrityViolationException("Error verifique los datos ingresados: ");
-		}
-	}*/
 
 }

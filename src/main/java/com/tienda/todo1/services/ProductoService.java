@@ -30,6 +30,10 @@ public class ProductoService {
 	private ProductoRepository productoRepository;
 	private CategoriaRepository categoriaRepository;
 
+	public ProductoService() {
+		
+	}
+	
 	@Autowired
 	public ProductoService(ProductoRepository productoRepository, CategoriaRepository categoriaRepository) {
 		this.productoRepository = productoRepository;
